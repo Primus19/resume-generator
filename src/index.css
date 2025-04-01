@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@media print {
+  @page {
+    margin: 0.5in;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
+
+  .print\:hidden {
+    display: none !important;
+  }
+
+  /* Force white background and black text */
+  * {
+    color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Remove any dark mode styles when printing */
+  .dark {
+    color-scheme: light !important;
+  }
+
+  .dark * {
+    color: black !important;
+    background: white !important;
+    border-color: #e5e7eb !important;
+  }
+}
