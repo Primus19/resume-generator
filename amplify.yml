@@ -8,7 +8,6 @@ frontend:
     build:
       commands:
         - npm run build
-        - npm prune --production
   artifacts:
     baseDirectory: .next
     files:
