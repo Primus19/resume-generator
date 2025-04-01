@@ -3,8 +3,8 @@ frontend:
   phases:
     preBuild:
       commands:
-        - npm install --legacy-peer-deps
-        - npm install html2pdf.js --legacy-peer-deps
+        - npm ci --production --no-optional
+        - npm install html2pdf.js --no-save
     build:
       commands:
         - npm run build
@@ -14,5 +14,4 @@ frontend:
       - '**/*'
   cache:
     paths:
-      - node_modules/**/*
       - .next/cache/**/*
