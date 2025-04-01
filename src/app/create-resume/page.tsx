@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import Link from 'next/link';
 
@@ -228,85 +230,20 @@ export default function CreateResume() {
                     <label className="block text-gray-300 mb-2">Description</label>
                     <textarea 
                       className="form-input w-full px-4 py-3 rounded-lg focus:outline-none h-32" 
-                      placeholder="• Led development of a new product feature that increased user engagement by 25%
-• Managed a team of 5 developers, improving sprint velocity by 30%
-• Implemented CI/CD pipeline that reduced deployment time by 50%"
+                      placeholder="• Led development of a key product feature that increased user engagement by 25%
+• Collaborated with cross-functional teams to implement new technologies
+• Mentored junior developers and conducted code reviews"
                     ></textarea>
                   </div>
                 </div>
               </div>
               
-              <button className="w-full py-3 border border-dashed border-gray-600 rounded-lg text-gray-400 hover:text-gray-300 hover:border-gray-500 mb-8">
-                + Add Another Experience
+              <button className="w-full py-3 mb-8 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded-lg flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clipRule="evenodd" />
+                </svg>
+                Add Another Experience
               </button>
-              
-              <h2 className="text-2xl font-bold mb-6">Education</h2>
-              <div className="mb-8 pb-8 border-b border-gray-700">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-gray-300 mb-2">Degree</label>
-                    <input 
-                      type="text" 
-                      className="form-input w-full px-4 py-3 rounded-lg focus:outline-none" 
-                      placeholder="Bachelor of Science in Computer Science"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-gray-300 mb-2">Institution</label>
-                    <input 
-                      type="text" 
-                      className="form-input w-full px-4 py-3 rounded-lg focus:outline-none" 
-                      placeholder="University Name"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-gray-300 mb-2">Graduation Year</label>
-                    <input 
-                      type="number" 
-                      className="form-input w-full px-4 py-3 rounded-lg focus:outline-none" 
-                      placeholder="2020"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-gray-300 mb-2">Location</label>
-                    <input 
-                      type="text" 
-                      className="form-input w-full px-4 py-3 rounded-lg focus:outline-none" 
-                      placeholder="City, State"
-                    />
-                  </div>
-                </div>
-              </div>
-              
-              <button className="w-full py-3 border border-dashed border-gray-600 rounded-lg text-gray-400 hover:text-gray-300 hover:border-gray-500 mb-8">
-                + Add Another Education
-              </button>
-              
-              <h2 className="text-2xl font-bold mb-6">Skills</h2>
-              <div className="mb-8">
-                <div className="form-input w-full px-4 py-3 rounded-lg focus:outline-none min-h-[100px]">
-                  <div className="flex flex-wrap gap-2 mb-2">
-                    <span className="bg-blue-900/50 text-blue-300 px-3 py-1 rounded-full text-sm flex items-center">
-                      JavaScript
-                      <button className="ml-2 text-blue-300 hover:text-blue-200">×</button>
-                    </span>
-                    <span className="bg-blue-900/50 text-blue-300 px-3 py-1 rounded-full text-sm flex items-center">
-                      React
-                      <button className="ml-2 text-blue-300 hover:text-blue-200">×</button>
-                    </span>
-                    <span className="bg-blue-900/50 text-blue-300 px-3 py-1 rounded-full text-sm flex items-center">
-                      Node.js
-                      <button className="ml-2 text-blue-300 hover:text-blue-200">×</button>
-                    </span>
-                  </div>
-                  <input 
-                    type="text" 
-                    className="bg-transparent border-none outline-none text-white w-full" 
-                    placeholder="Type a skill and press Enter"
-                  />
-                </div>
-                <p className="text-gray-400 text-sm mt-2">Enter skills one at a time and press Enter</p>
-              </div>
               
               <div className="flex justify-between mt-8">
                 <button 
@@ -331,20 +268,94 @@ export default function CreateResume() {
             <h2 className="text-2xl font-bold mb-8 text-center">Finalize Your Resume</h2>
             <div className="glass-effect p-8 rounded-xl max-w-3xl mx-auto">
               <div className="mb-8">
-                <h3 className="text-xl font-semibold mb-4">Preview</h3>
-                <div className="bg-gray-800 rounded-lg h-96 flex items-center justify-center">
-                  <p className="text-gray-400">Resume Preview</p>
+                <h3 className="text-xl font-semibold mb-4">Education</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-gray-300 mb-2">Degree</label>
+                    <input 
+                      type="text" 
+                      className="form-input w-full px-4 py-3 rounded-lg focus:outline-none" 
+                      placeholder="Bachelor of Science in Computer Science"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-gray-300 mb-2">Institution</label>
+                    <input 
+                      type="text" 
+                      className="form-input w-full px-4 py-3 rounded-lg focus:outline-none" 
+                      placeholder="University Name"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-gray-300 mb-2">Graduation Year</label>
+                    <input 
+                      type="text" 
+                      className="form-input w-full px-4 py-3 rounded-lg focus:outline-none" 
+                      placeholder="2020"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-gray-300 mb-2">Location</label>
+                    <input 
+                      type="text" 
+                      className="form-input w-full px-4 py-3 rounded-lg focus:outline-none" 
+                      placeholder="City, State"
+                    />
+                  </div>
+                </div>
+              </div>
+              
+              <div className="mb-8">
+                <h3 className="text-xl font-semibold mb-4">Skills</h3>
+                <div className="mb-4">
+                  <label className="block text-gray-300 mb-2">Add Skills (separated by commas)</label>
+                  <input 
+                    type="text" 
+                    className="form-input w-full px-4 py-3 rounded-lg focus:outline-none" 
+                    placeholder="JavaScript, React, Node.js, Python, SQL, Git"
+                  />
+                </div>
+                <div className="flex flex-wrap gap-2 mt-4">
+                  <span className="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full">JavaScript</span>
+                  <span className="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full">React</span>
+                  <span className="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full">Node.js</span>
+                  <span className="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full">Python</span>
+                  <span className="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full">SQL</span>
+                  <span className="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full">Git</span>
                 </div>
               </div>
               
               <div className="mb-8">
                 <h3 className="text-xl font-semibold mb-4">Color Scheme</h3>
-                <div className="grid grid-cols-5 gap-4">
-                  <button className="w-full h-12 bg-blue-500 rounded-lg"></button>
-                  <button className="w-full h-12 bg-purple-500 rounded-lg"></button>
-                  <button className="w-full h-12 bg-teal-500 rounded-lg"></button>
-                  <button className="w-full h-12 bg-red-500 rounded-lg"></button>
-                  <button className="w-full h-12 bg-green-500 rounded-lg"></button>
+                <div className="flex gap-4">
+                  <div className="flex items-center">
+                    <input type="radio" id="blue" name="color" className="mr-2" defaultChecked />
+                    <label htmlFor="blue" className="flex items-center">
+                      <span className="w-6 h-6 rounded-full bg-blue-500 mr-2"></span>
+                      Blue
+                    </label>
+                  </div>
+                  <div className="flex items-center">
+                    <input type="radio" id="purple" name="color" className="mr-2" />
+                    <label htmlFor="purple" className="flex items-center">
+                      <span className="w-6 h-6 rounded-full bg-purple-500 mr-2"></span>
+                      Purple
+                    </label>
+                  </div>
+                  <div className="flex items-center">
+                    <input type="radio" id="teal" name="color" className="mr-2" />
+                    <label htmlFor="teal" className="flex items-center">
+                      <span className="w-6 h-6 rounded-full bg-teal-500 mr-2"></span>
+                      Teal
+                    </label>
+                  </div>
+                  <div className="flex items-center">
+                    <input type="radio" id="red" name="color" className="mr-2" />
+                    <label htmlFor="red" className="flex items-center">
+                      <span className="w-6 h-6 rounded-full bg-red-500 mr-2"></span>
+                      Red
+                    </label>
+                  </div>
                 </div>
               </div>
               
@@ -358,7 +369,7 @@ export default function CreateResume() {
                 <button 
                   className="glow-button px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg"
                 >
-                  Download PDF
+                  Generate Resume
                 </button>
               </div>
             </div>
