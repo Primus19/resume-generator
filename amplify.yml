@@ -3,7 +3,7 @@ frontend:
   phases:
     preBuild:
       commands:
-        - npm ci --production --no-optional
+        - npm install --omit=dev
         - npm install html2pdf.js --no-save
     build:
       commands:
