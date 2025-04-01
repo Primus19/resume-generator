@@ -38,11 +38,7 @@ function App() {
   const NavLink = ({ to, children, icon: Icon }: { to: string; children: React.ReactNode; icon: React.ComponentType<any> }) => (
     <Link
       to={to}
-      className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
-        isActive(to)
-          ? 'bg-primary dark:bg-primary-dark text-white'
-          : 'text-gray-600 dark:text-gray-300 hover:bg-primary hover:text-white dark:hover:bg-primary-dark'
-      }`}
+      className={`nav-link ${isActive(to) ? 'nav-link-active' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'}`}
     >
       <Icon size={20} />
       <span>{children}</span>
@@ -52,12 +48,12 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
       {/* Navigation */}
-      <nav className="bg-white dark:bg-gray-800 shadow-sm">
+      <nav className="bg-white dark:bg-gray-800 shadow-sm backdrop-blur-sm bg-white/80 dark:bg-gray-800/80 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-between h-16">
             <div className="flex items-center">
-              <Link to="/" className="flex items-center gap-2">
-                <FileText className="text-primary dark:text-white" size={24} />
+              <Link to="/" className="flex items-center gap-2 group">
+                <FileText className="text-primary dark:text-white transition-transform group-hover:scale-110" size={24} />
                 <span className="text-xl font-bold text-primary dark:text-white">ResumeBuilder</span>
               </Link>
             </div>
@@ -69,7 +65,8 @@ function App() {
               <NavLink to="/resume-form" icon={User}>Create Resume</NavLink>
               <button
                 onClick={toggleDarkMode}
-                className="p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                className="p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                aria-label="Toggle dark mode"
               >
                 {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
               </button>
@@ -79,13 +76,15 @@ function App() {
             <div className="md:hidden flex items-center space-x-2">
               <button
                 onClick={toggleDarkMode}
-                className="p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                className="p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                aria-label="Toggle dark mode"
               >
                 {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
               </button>
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white"
+                className="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white transition-colors"
+                aria-label="Toggle menu"
               >
                 {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
@@ -95,7 +94,7 @@ function App() {
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <div className="md:hidden">
+          <div className="md:hidden animate-slide-up">
             <div className="px-2 pt-2 pb-3 space-y-1">
               <NavLink to="/" icon={Home}>Home</NavLink>
               <NavLink to="/templates" icon={FileText}>Templates</NavLink>
@@ -106,7 +105,7 @@ function App() {
       </nav>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 py-8">
+      <main className="max-w-7xl mx-auto px-4 py-8 animate-fade-in">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/templates" element={<Templates />} />

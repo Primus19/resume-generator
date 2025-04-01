@@ -61,32 +61,48 @@ const ResumeForm = () => {
   };
 
   const formatBulletPoints = (text: string): string[] => {
-    // First, split by common bullet point characters, newlines, and other separators
-    const lines = text.split(/[•\u2022\u2023\u25E6\u2043\-\n,;]+/)
-      .map(line => line.trim())
-      .filter(line => line.length > 0);
-
-    // Create a map to store normalized versions of lines for comparison
-    const normalizedMap = new Map<string, string>();
+    // Split the text into paragraphs first
+    const paragraphs = text.split(/\n\s*\n/);
+    const bulletPoints: string[] = [];
     
-    // Normalize each line and store the original if it's unique
-    lines.forEach(line => {
-      const normalized = line.toLowerCase()
-        .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '')
-        .replace(/\s+/g, ' ')
-        .trim();
-      
-      // If this normalized version doesn't exist, or if the current line is shorter
-      if (!normalizedMap.has(normalized) || 
-          line.length < normalizedMap.get(normalized)!.length) {
-        normalizedMap.set(normalized, line);
+    paragraphs.forEach(paragraph => {
+      // Check if the paragraph already contains bullet points
+      if (/^[•\u2022\u2023\u25E6\u2043\-]\s/.test(paragraph.trim())) {
+        // Split existing bullet points and clean them
+        const points = paragraph
+          .split(/[•\u2022\u2023\u25E6\u2043\-]\s+/)
+          .map(point => point.trim())
+          .filter(point => point.length > 0);
+        bulletPoints.push(...points);
+      } else {
+        // Split by periods that are followed by a space or newline
+        const sentences = paragraph
+          .split(/\.\s+|\.\n/)
+          .map(sentence => sentence.trim())
+          .filter(sentence => sentence.length > 0);
+        
+        sentences.forEach(sentence => {
+          // Add period back if it was a complete sentence
+          if (sentence.length > 0) {
+            bulletPoints.push(sentence + (sentence.endsWith('.') ? '' : '.'));
+          }
+        });
       }
     });
 
-    // Convert back to array and remove any remaining duplicates
-    return Array.from(new Set(Array.from(normalizedMap.values())))
-      .filter(line => line.length > 0)
-      .map(line => line.charAt(0).toUpperCase() + line.slice(1));
+    // Remove duplicates while preserving order
+    const seen = new Set<string>();
+    return bulletPoints
+      .filter(point => {
+        const normalized = point.toLowerCase().trim();
+        if (seen.has(normalized)) return false;
+        seen.add(normalized);
+        return true;
+      })
+      .map(point => {
+        // Ensure first letter is capitalized
+        return point.charAt(0).toUpperCase() + point.slice(1);
+      });
   };
 
   const handleExperienceChange = (index: number, field: string, value: string) => {
@@ -276,7 +292,7 @@ const ResumeForm = () => {
                 </div>
                 <div className="col-span-2">
                   <textarea
-                    placeholder="Description (Enter each achievement or responsibility on a new line, or use bullet points • or dashes -)"
+                    placeholder="Description (Use periods to separate achievements. Use bullet points • or - for lists)"
                     value={exp.description}
                     onChange={(e) => handleExperienceChange(index, 'description', e.target.value)}
                     className="w-full p-3 border rounded-lg h-32 focus:ring-2 focus:ring-primary dark:focus:ring-primary-dark focus:border-transparent font-mono dark:bg-gray-700 dark:border-gray-600 dark:text-white"
@@ -369,7 +385,7 @@ const ResumeForm = () => {
                   className="p-3 border rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-primary-dark focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white w-full"
                 />
                 <textarea
-                  placeholder="List skills (one per line, or use bullet points • or dashes -)"
+                  placeholder="List skills (Use periods to separate skills. Use bullet points • or - for lists)"
                   value={skill.bulletPoints.join('\n')}
                   onChange={(e) => handleSkillsChange(index, 'description', e.target.value)}
                   className="w-full p-3 border rounded-lg h-32 focus:ring-2 focus:ring-primary dark:focus:ring-primary-dark focus:border-transparent font-mono dark:bg-gray-700 dark:border-gray-600 dark:text-white"
@@ -420,7 +436,7 @@ const ResumeForm = () => {
                   />
                 </div>
                 <textarea
-                  placeholder="Project Description (Enter details on new lines, or use bullet points • or dashes -)"
+                  placeholder="Project Description (Use periods to separate achievements. Use bullet points • or - for lists)"
                   value={project.description}
                   onChange={(e) => handleProjectChange(index, 'description', e.target.value)}
                   className="w-full p-3 border rounded-lg h-32 focus:ring-2 focus:ring-primary dark:focus:ring-primary-dark focus:border-transparent font-mono dark:bg-gray-700 dark:border-gray-600 dark:text-white"

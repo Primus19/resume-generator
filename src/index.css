@@ -2,35 +2,140 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  body {
+    @apply bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-200;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-6 py-2.5 rounded-lg font-medium transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98];
+  }
+
+  .btn-primary {
+    @apply btn bg-primary text-white hover:bg-primary-dark;
+  }
+
+  .btn-outline {
+    @apply btn border-2 border-primary text-primary hover:bg-primary hover:text-white dark:border-primary-dark dark:text-primary-dark dark:hover:bg-primary-dark;
+  }
+
+  .input {
+    @apply w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 
+    focus:ring-2 focus:ring-primary/20 dark:focus:ring-primary-dark/20 focus:border-primary dark:focus:border-primary-dark
+    transition-all duration-200;
+  }
+
+  .card {
+    @apply bg-white dark:bg-gray-800 rounded-xl shadow-soft transition-all duration-200 hover:shadow-lg;
+  }
+
+  .nav-link {
+    @apply flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200;
+  }
+
+  .nav-link-active {
+    @apply bg-primary/10 dark:bg-primary-dark/10 text-primary dark:text-primary-dark;
+  }
+}
+
+/* Print styles */
 @media print {
   @page {
     margin: 0.5in;
+    size: letter portrait;
+  }
+
+  @page :first {
+    margin-top: 0;
   }
 
   body {
-    background: white;
-    color: black;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    background: white !important;
+    color: black !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
+  nav, 
+  footer, 
+  button,
   .print\:hidden {
     display: none !important;
   }
 
-  /* Force white background and black text */
   * {
     color-adjust: exact !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
+    background-color: transparent !important;
   }
 
-  /* Remove any dark mode styles when printing */
   .dark {
     color-scheme: light !important;
   }
 
   .dark * {
     color: black !important;
-    background: white !important;
+    background: transparent !important;
     border-color: #e5e7eb !important;
+  }
+
+  a[href^="http"]:after,
+  a[href^="https"]:after {
+    content: "" !important;
+  }
+
+  section {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  h1, h2, h3 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  .shadow-lg, 
+  .shadow-md, 
+  .shadow-sm {
+    box-shadow: none !important;
+  }
+
+  a {
+    text-decoration: none !important;
+    color: black !important;
+  }
+
+  .p-8 {
+    padding: 1rem !important;
+  }
+
+  .space-y-8 > * + * {
+    margin-top: 1.5rem !important;
+  }
+
+  .bg-primary\/10,
+  .dark\:bg-primary-dark\/10 {
+    background-color: transparent !important;
+  }
+
+  .text-primary,
+  .dark\:text-primary-dark {
+    color: black !important;
+  }
+
+  .rounded-lg,
+  .rounded-xl,
+  .rounded-full {
+    border-radius: 0 !important;
   }
 }
